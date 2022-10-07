@@ -16,8 +16,8 @@ export default function SessaoFilme(){
 
         promisse.then((res) => {
             console.log(res.data)
-           setDate(res.data.days);     
-           setInfosFilme(res.data);
+            setDate(res.data.days);     
+            setInfosFilme(res.data);
             
         }
           
@@ -76,7 +76,7 @@ p{
     margin-top: 38px;
     margin-left: 14px;
     height: 40px;
-    width: 200px;
+    width: 250px;
     font-family: 'Roboto', sans-serif;
     font-size: 26px;
     font-weight: 400;
