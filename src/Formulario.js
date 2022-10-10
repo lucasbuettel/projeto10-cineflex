@@ -1,18 +1,60 @@
+import axios from "axios";
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
 
-export default function Formulario(){
-    const [nome,SetNome] = useState("");
-    const [cpf,setCpf] = useState("");
-    return(
+export default function Formulario({ array }) {
+    const [nome, SetNome] = useState("");
+    const [cpf, setCpf] = useState("");
+    const navigate = useNavigate();
 
-        <Form /* onSubmit={reservarLugar} */>
+    function reservarLugar(e) {
+        e.preventDefault()
+        const URL = "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many"
 
-		  <div className="primeiro-input"><h1>Nome do Comprador:</h1><input type="name"  placeholder="Digite seu nome..." required /></div>
-		  <div className="segundo-input"><h1>CPF do Comprador:</h1><input type="cpf"  placeholder="Digite seu CPF..." required/></div>
-		  <div><button type="submit">{'Reservar Assento(s)'}</button></div>
-		</Form>
-        
+        const body = {
+            ids: array,
+            nome: nome,
+            cpf: cpf
+        }
+
+        const promisse = axios.post(URL, body)
+
+        promisse.then(() => {
+            
+            navigate("/sucesso");
+        })
+
+        promisse.catch((err) => {
+            alert(err.response.data.message)
+        })
+    }
+    return (
+
+        <Form onSubmit={reservarLugar} >
+
+            <div className="primeiro-input"><label forhtml="nome">Nome do Comprador:</label>
+                <input
+                    id="nome"
+                    type="nome"
+                    value={nome}
+                    onChange={(e) => SetNome(e.target.value)}
+                    placeholder="Digite seu nome..."
+                    required />
+            </div>
+            <div className="segundo-input"><label forhtml="cpf">CPF do Comprador:</label>
+                <input
+                    id="cpf"
+                    type="text"
+                    value={cpf}
+                    onChange={(e) => setCpf(e.target.value)}
+                    placeholder="Digite seu CPF..."
+                    required
+                />
+            </div>
+            <div><button type="submit">{'Reservar Assento(s)'}</button></div>
+        </Form>
+
     )
 
 }
@@ -20,13 +62,14 @@ export default function Formulario(){
 const Form = styled.form`
 margin-top:42px;
 margin-bottom: 30px;
-h1{
+label{
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
     font-weight: 400;
     line-height: 21px;
     letter-spacing: 0em;
     text-align: left;
+    margin-left: 40px;
 }
 .primeiro-input{
     margin-bottom: 7px;
@@ -40,6 +83,7 @@ input{
 width: 327px;
 border: 1px solid #D4D4D4;
 border-radius: 3px;
+margin-left:40px
 
 }
 button{
@@ -50,6 +94,6 @@ button{
     border: none;
     color: #FFFFFF;
     margin-left: 51px;
-
+    cursor: pointer;
 }
 `

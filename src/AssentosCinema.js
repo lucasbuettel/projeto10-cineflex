@@ -9,8 +9,9 @@ export default function AssentosCinema() {
     const [assentos, setAssentos] = useState([]);
     const [filme, setFilme] = useState([]);
     const [horario, setHorario] = useState("");
-    const[diaSemana, setDiaSemana]= useState("");
+    const [diaSemana, setDiaSemana] = useState("");
     const { idSessao } = useParams();
+    const array = [];
 
     useEffect(() => {
         const promisse = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
@@ -29,13 +30,15 @@ export default function AssentosCinema() {
     return (
         <CentralizaPag>
             <TituloPagina><p>{`Selecione o(s) assento(s)`}</p></TituloPagina>
-            <DisposicaoSala>{assentos.map((cadeiras) => <LocalAssento cadeiras={cadeiras} />)}</DisposicaoSala>
+            <DisposicaoSala>{assentos.map((cadeiras) =>
+                <LocalAssento cadeiras={cadeiras} array={array} />)}
+            </DisposicaoSala>
             <Legendas>
-                <div><Selecionado></Selecionado> <p>Selecionado</p></div>
-                <div><Disponivel></Disponivel><p>Disponível</p></div>
-                <div><Indisponivel></Indisponivel><p>Indisponível</p></div>
+                <div><Selecionado/> <p>Selecionado</p></div>
+                <div><Disponivel/><p>Disponível</p></div>
+                <div><Indisponivel/><p>Indisponível</p></div>
             </Legendas>
-            <Formulario />
+            <Formulario array={array}/>
             <FilmeRodape2>
                 <div><img src={filme.posterURL} /></div>
                 <p>
@@ -103,6 +106,7 @@ const Indisponivel = styled.div`
     text-align: center;
     font-family: 'Roboto', sans-serif;
     border: 1px solid #F7C52B;
+    cursor: auto;
 `
 
 

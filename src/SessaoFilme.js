@@ -18,7 +18,6 @@ export default function SessaoFilme(){
             console.log(res.data)
             setDate(res.data.days);     
             setInfosFilme(res.data);
-            
         }
           
         );
