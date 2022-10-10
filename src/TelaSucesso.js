@@ -1,23 +1,26 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-export default function TelaSucesso() {
+export default function TelaSucesso(props) {
+    console.log(props)
+    
     return (
         <CentralizaPag>
             <TituloPagina><p>{`Pedido feito com sucesso!`}</p></TituloPagina>
             <InfoFilme>
                 <p>Filme e sessão</p>
-                <h1>Enola Holmes 24/06/2021 15:00</h1>
+                <h1>{`${props.filme.title}, ${props.diaSemana}, ${props.horario}`}</h1>
             </InfoFilme>
             <Ingressos>
                 <p>Ingressos</p>
                 <h1>Assento 15</h1>
             </Ingressos>
             <DadosComprador>
-            <p>Nome: João da Silva Sauro</p>
-            <h1>CPF: 123.456.789-10</h1>
+                <p>Comprador</p>
+                <h1>{`Nome: ${props.nome}`}</h1>
+                <h1> {`CPF:${props.cpf}`}</h1>
             </DadosComprador>
-            <Link to={`/`}><BotaoVoltaMenu><p>Voltar pra Home</p></BotaoVoltaMenu></Link>
+            <BotaoVoltaMenu><Link to={`/`}><p>Voltar pra Home</p></Link></BotaoVoltaMenu>
         </CentralizaPag>
     )
 }
@@ -145,7 +148,7 @@ const BotaoVoltaMenu = styled.button`
 height: 42px;
 width: 225px;
 background-color: #E8833A;
-
+cursor: pointer;
 border-radius: 3px;
 
 p{

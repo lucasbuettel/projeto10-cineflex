@@ -5,11 +5,9 @@ import styled from "styled-components"
 import LocalAssento from "./LocalAssento";
 import Formulario from "./Formulario";
 
-export default function AssentosCinema() {
+export default function AssentosCinema({nome, setNome, cpf, setCpf, filme, setFilme, horario, setHorario, diaSemana, setDiaSemana}) {
     const [assentos, setAssentos] = useState([]);
-    const [filme, setFilme] = useState([]);
-    const [horario, setHorario] = useState("");
-    const [diaSemana, setDiaSemana] = useState("");
+    
     const { idSessao } = useParams();
     const array = [];
 
@@ -17,7 +15,7 @@ export default function AssentosCinema() {
         const promisse = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
 
         promisse.then((res) => {
-            console.log(res.data)
+            //console.log(res.data)
             setFilme(res.data.movie);
             setAssentos(res.data.seats);
             setHorario(res.data.name);
@@ -38,7 +36,7 @@ export default function AssentosCinema() {
                 <div><Disponivel/><p>Disponível</p></div>
                 <div><Indisponivel/><p>Indisponível</p></div>
             </Legendas>
-            <Formulario array={array}/>
+            <Formulario array={array} nome={nome} setNome={setNome} cpf={cpf} setCpf={setCpf}/>
             <FilmeRodape2>
                 <div><img src={filme.posterURL} /></div>
                 <p>

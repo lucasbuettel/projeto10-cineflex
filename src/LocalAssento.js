@@ -10,7 +10,7 @@ export default function LocalAssento({ cadeiras, array }) {
         setSelecionaAssento(!selecionaAssento);
         cadeiras.isAvailable = true;
         console.log(cadeiras);
-        array.push(Number(cadeiras.name));
+        array.push(Number(cadeiras.id));
         console.log(array);
         }
     }

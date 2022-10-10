@@ -12,7 +12,7 @@ export default function EscolheFilme() {
         const promisse = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies");
 
         promisse.then((res) => {
-            console.log(res.data)
+           // console.log(res.data)
             setPoster(res.data);
 
         }

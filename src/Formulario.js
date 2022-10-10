@@ -3,9 +3,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
 
-export default function Formulario({ array }) {
-    const [nome, SetNome] = useState("");
-    const [cpf, setCpf] = useState("");
+export default function Formulario({ array,nome, setNome, cpf, setCpf }) {
+    
     const navigate = useNavigate();
 
     function reservarLugar(e) {
@@ -17,11 +16,12 @@ export default function Formulario({ array }) {
             nome: nome,
             cpf: cpf
         }
-
+        
+        console.log(body)
         const promisse = axios.post(URL, body)
 
-        promisse.then(() => {
-            
+        promisse.then((res) => {
+            console.log(res.data)
             navigate("/sucesso");
         })
 
@@ -38,7 +38,7 @@ export default function Formulario({ array }) {
                     id="nome"
                     type="nome"
                     value={nome}
-                    onChange={(e) => SetNome(e.target.value)}
+                    onChange={(e) => setNome(e.target.value)}
                     placeholder="Digite seu nome..."
                     required />
             </div>
